@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>🔥Calorie Compass</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="container">
+      <nav>
+        <ul>
+          <li><a href="index.html">BMI Buddy</a></li>
+          <li><a href="CC.html">Calorie Compass</a></li>
+          <li><a href="WW.html">Water Watcher</a></li>
+          <li><a href="SS.html">Steps Sankhya</a></li>
+        </ul>
+      </nav>
+      <hgroup>
+        <h1>Calorie Compass</h1>
+        <p>Calculate the Calories</p>
+      </hgroup>
+    </header>
+    <main class="container">
+      <section>
+        <p id="result"></p>
+      </section>
+    </main>
+    <Script id="ng2_cc">
+      const CalcBtn_InputElement = document.getElementById("convertButton");
+      function calculateConversion(){
+        const resultElement = document.getElementById("result");
+        const usdInputElement = document.getElementById("usdAmount");
+        const USDValue = usdInputElement.value;
+       
+        const INRValue = USDValue *86;
+        resultElement.innerText = "USD Value: "+USDValue+" Equals INR: "+INRValue.toFixed(2);
+      }
+     
+      CalcBtn_InputElement.addEventListener("click",calculateConversion)
+    </Script>
+  </body>
+</html>

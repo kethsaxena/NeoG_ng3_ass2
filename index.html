@@ -3,12 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
-    <meta
-      name="description"
-      content="Get your github link just from userlink"
-    />
-    <title>Github URL Generator</title>
+    <title>🏋 BMI Buddy</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
@@ -17,96 +12,101 @@
   </head>
   <body>
     <header class="container">
+      <nav>
+        <ul>
+          <li><a href="index.html">BMI Buddy</a></li>
+          <li><a href="CC.html">Calorie Compass</a></li>
+          <li><a href="WW.html">Water Watcher</a></li>
+          <li><a href="SS.html">Steps Sankhya</a></li>
+        </ul>
+      </nav>
       <hgroup>
-        <h1>Github URL Generator</h1>
-        <p>Get your github link just from userlink</p>
+        <h1>BMI Buddy</h1>
+        <p>Calculate Your BMI</p>
       </hgroup>
     </header>
     <main class="container">
-      <fieldset role="group" >
-        <input type ="text" id="github" placeholder="Enter your Github username"/>
-        <input type="button" id="generateURL" value="Generate URL"/>
-      </fieldset>
-      <div id="app"></div>
-    </main>
-    <footer class="container neog-footer">
-      <small>
-        go from zero to hero at full stack development with
-        <a href="https://neog.camp">neog.camp</a>
-      </small>
-    </footer>
-    <!-- <script>
-      // TASK 1
-      // const username = "Kethsaxena";
-      // function greetUser() {
-      //   console.log("Hello " + username);
-      // }
+      <div style="display: flex; flex-direction: column; gap: 15px; align-items: flex-start;">
+        <input id="Weight" type="text" placeholder="Enter Weight(Kg)" style="width: 350px;">
+        <input id="Height" type="text" placeholder="Enter Height(cm)" style="width: 350px;">
+      
+        <select id="gender" name="gender" style="width: 350px;">
+          <option value="Female">Female</option>
+          <option value="Male">Male</option>
+        </select>
+        <button id="Btn">Check my BMI</button>
+      </div>
+      <section>
+        <p id="result"></p>
+      </section>
+      <script>
+  document.getElementById('Btn').addEventListener('click', () => {
+    const weightInput = document.getElementById('Weight').value.trim();
+    const heightInput = document.getElementById('Height').value.trim();
+    const gender = document.getElementById('gender').value;
+    const resultEl = document.getElementById('result');
 
-      // greetUser();
+    // Parse and validate
+    const weight = parseFloat(weightInput);
+    const heightCm = parseFloat(heightInput);
 
-      //console.log(greetUser(username));
-
-      // TASK 2
-
-      // greetUser();
-
-      // //console.log(greetUser(username));
-
-      // function greetPerson(username) {
-      //   console.log("Hello " + username + "! Welcome to our website!");
-      // }
-
-      // // greetPerson("Ajay");
-      // // greetPerson("Kidambi Srikanth");
-      // // greetPerson("Lakshay Sen");
-
-      // function formattedMessage(message) {
-      //   const resultingMessage = "*" + message + "*";
-      //   return resultingMessage;
-      // }
-
-      // console.log(formattedMessage("Hello World"));
-
-      // const result = formattedMessage("Good Morning");
-      // function combineStrings(string1, string2) {
-      //   const combined = string1 + " " + string2;
-      //   return combined;
-      // }
-      // console.log(combineStrings("Bhima", "Sen"));
-    </script> -->
-    <!-- <script id="ng1.2"> 
-    // TASK 1
-    const username = "Kethsaxena";
-
-    function getGitHubURL(username) {
-      return "https://github.com/"+username;
+    if ((isNaN(weight) || weight <= 0) &&(isNaN(heightCm) || heightCm <= 0)) {
+      resultEl.innerText = '⚠️ Please enter valid height (cm) and weight (kg).';
+      return;
     }
 
-    const appElement = document.getElementById("app")
-    appElement.innerText=getGitHubURL(username);
-
-    </script> -->
-    <script id="ng1.3"> 
-    // TASK 1
-    const username = "Kethsaxena";
-
-    function getGitHubURL(username) {
-      return "https://github.com/"+username;
+    // catch if just weight is invalid
+    if (isNaN(weight) || weight <= 0) {
+      resultEl.innerText = '⚠️ Please enter a valid weight in kg.';
+      return;
     }
 
-    function handleGenerateClick(){
-      const githubURL = getGitHubURL(inputElement.value);
-      appElement.innerHTML = githubURL
+    // catch if just height is invalid
+    if (isNaN(heightCm) || heightCm <= 0) {
+      resultEl.innerText = '⚠️ Please enter a valid height in cm.';
+      return;
     }
 
-    //OBJECTS
-    const inputElement = document.getElementById("github")
-    const buttonElement = document.getElementById("generateURL")   
-    const appElement = document.getElementById("app")
+    // Compute BMI
+    const heightM = heightCm / 100;
+    const bmi = weight / (heightM * heightM);
+    const bmiRounded = bmi.toFixed(2);
 
-    //appElement.innerText = 
-    buttonElement.addEventListener("click",handleGenerateClick)
+    function calcBMIMale(index){
+      if (index < 18.5) {
+      category = 'Underweight';
+    } else if (index < 25) {
+      category = 'Normal weight';
+    } else if (index < 30) {
+      category = 'Overweight';
+    } else {
+      category = 'Obese';
+    }
+    }
 
-    </script>
+    
+    function calcBMIFemale(index){
+    if (index < 18) {category = 'Underweight';
+    } else if (index < 24) {
+      category = 'Normal weight';
+    } else if (index < 29) {
+      category = 'Overweight';
+    } else {
+      category = 'Obese';
+    }
+  }
+    
+    // Classify
+    // MALE
+    let category;
+    if(gender ==="Male"){calcBMIMale(bmi)}
+    // FEMALE
+    else{calcBMIFemale(bmi)}
+
+    
+    // Display
+    resultEl.innerText = `Gender: ${gender} — BMI:${bmiRounded} (${category}).`;
+  });
+</script>
   </body>
 </html>
