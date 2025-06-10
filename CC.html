@@ -26,22 +26,81 @@
       </hgroup>
     </header>
     <main class="container">
+      <div>
+        <form></form>
+            <label for="age">Age:</label>
+            <input
+              type="number"
+              id="age"
+              name="age"
+              min="0"
+              placeholder="Enter your age"
+              required
+            />
+
+            <!-- Gender dropdown -->
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+              <option value="" disabled selected>-- Select Gender --</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+
+            <!-- Activity Level dropdown -->
+            <label for="activity-level">Activity Level:</label>
+            <select id="activity-level" name="activity-level" required>
+              <option value="" disabled selected>-- Select Activity Level --</option>
+              <option value="sedentry">Sedentry</option>
+              <option value="light">Light</option>
+              <option value="active">Active</option>
+            </select>
+
+            <button type="button" id="estimate-calories">
+              Estimate Calories
+            </button>
+        </form>
+      </div>
       <section>
         <p id="result"></p>
       </section>
     </main>
-    <Script id="ng2_cc">
-      const CalcBtn_InputElement = document.getElementById("convertButton");
-      function calculateConversion(){
-        const resultElement = document.getElementById("result");
-        const usdInputElement = document.getElementById("usdAmount");
-        const USDValue = usdInputElement.value;
-       
-        const INRValue = USDValue *86;
-        resultElement.innerText = "USD Value: "+USDValue+" Equals INR: "+INRValue.toFixed(2);
+    <script>
+
+      function estimateCalories(){
+        const ageInput = document.getElementById('age');
+    const genderSelect = document.getElementById('gender');
+    const activitySelect = document.getElementById('activity-level');
+    const resultP = document.getElementById('result');
+
+    const age = parseInt(ageInput.value, 10);
+    if (isNaN(age) || age <= 0) {
+      resultP.innerText = 'Please enter a valid age.';
+      return;
+    }
+
+    const gender = genderSelect.value;
+    const activity = activitySelect.value;
+    let calories;
+
+    if (gender === 'male') {
+      if (activity === 'sedentry')   calories = 2000;
+      else if (activity === 'light') calories = 2200;
+      else if (activity === 'active')calories = 2500;
+    } else if (gender === 'female') {
+      if (activity === 'sedentry')   calories = 1800;
+      else if (activity === 'light') calories = 2000;
+      else if (activity === 'active')calories = 2200;
+    }
+
+    if (calories) {
+      resultP.innerText = `Estimated daily calorie needed: ${calories} kcal`;
+    } else {
+      resultP.innerText = 'Please select both gender and activity level.';
+    }
       }
-     
-      CalcBtn_InputElement.addEventListener("click",calculateConversion)
-    </Script>
+
+  // button logic
+  document.getElementById('estimate-calories').addEventListener('click',estimateCalories);
+</script>
   </body>
 </html>
