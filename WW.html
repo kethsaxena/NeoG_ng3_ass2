@@ -22,14 +22,76 @@
       </nav>
       <hgroup>
         <h1>Water Watcher</h1>
-        <p>A Micro Web App will come here?</p>
       </hgroup>
     </header>
     <main class="container">
+      <div style="display: flex; flex-direction: column; gap: 15px; align-items: flex-start;">
+        <input id="Weight" type="text" placeholder="Enter Weight(Kg)" style="width: 350px;">
+        <select id="Season" name="Season" style="width: 350px;">
+          <option value="Summer">Summer</option>
+          <option value="Winter">Winter</option>
+          <option value="Monsoon">Monsoon</option>
+        </select>
+        <button id="Btn">Suggest Water Intake</button>
+      </div>
       <section>
         <p id="result"></p>
       </section>
       <script>
+        let waterVol;
+
+        function setCriteriaWeight()
+        {
+          
+          const inputElementWeight = document.getElementById("Weight");
+          const valWeight = parseFloat(inputElementWeight.value);
+          
+          if (valWeight){
+              switch (true) {
+                  case (valWeight < 50):
+                      waterVol =1.5;
+                  case (valWeight < 70):
+                      waterVol =2.0;
+                  case (valWeight >= 70):
+                      waterVol =2.5;
+              return waterVol;
+          }
+        }
+        else{console.log("Error: Weight is Undefined!");}
+          
+        }
+        function setCriteriaSeason(waterVol){
+          
+          const inputElementSeason = document.getElementById("Season");
+          const valSeason = inputElementSeason.value;
+          
+          if (valSeason){
+              switch (true) {
+                  case (valSeason === "Summer"):
+                      waterVol +=1.5;
+                  case (valSeason === "Water"):
+                      waterVol -=0.5;
+              return waterVol;
+          }
+        }
+        else{console.log("Error: Season is Undefined!");}
+        }
+
+
+        function suggestedWaterEst(){
+          
+          let waterVol = setCriteriaWeight();
+          waterVol = setCriteriaSeason(waterVol);
+          return `Drink at least ${waterVol} L of water daily.`
+        }
+          const Btn = document.getElementById("Btn")
+          Btn.addEventListener("click",() => {
+
+          const message = suggestedWaterEst()
+          console.log(message) 
+          const resultEl = document.getElementById('result');
+          resultEl.innerText = message;
+        })
       </script>
     </main>
   </body>

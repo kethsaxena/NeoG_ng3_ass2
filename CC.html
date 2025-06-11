@@ -50,7 +50,7 @@
             <label for="activity-level">Activity Level:</label>
             <select id="activity-level" name="activity-level" required>
               <option value="" disabled selected>-- Select Activity Level --</option>
-              <option value="sedentry">Sedentry</option>
+              <option value="sedentary">sedentary</option>
               <option value="light">Light</option>
               <option value="active">Active</option>
             </select>
@@ -86,11 +86,11 @@
         console.log(age)
     
     // if (gender === 'male') {
-    //   if (activity === 'sedentry')   calories = 2000;
+    //   if (activity === 'sedentary')   calories = 2000;
     //   else if (activity === 'light') calories = 2200;
     //   else if (activity === 'active')calories = 2500;
     // } else if (gender === 'female') {
-    //   if (activity === 'sedentry')   calories = 1800;
+    //   if (activity === 'sedentary')   calories = 1800;
     //   else if (activity === 'light') calories = 2000;
     //   else if (activity === 'active')calories = 2200;
     // }
@@ -142,7 +142,7 @@
 
     function selectCal(){
       if(activity==='active'){return active}
-      else if (activity==='sedentry'){return sedentary}
+      else if (activity==='sedentary'){return sedentary}
       else if (activity==='light'){return light}
     } 
 
