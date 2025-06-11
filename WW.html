@@ -47,18 +47,23 @@
           const valWeight = parseFloat(inputElementWeight.value);
           
           if (valWeight){
+              console.log(valWeight)
               switch (true) {
-                  case (valWeight < 50):
-                      waterVol =1.5;
-                  case (valWeight < 70):
-                      waterVol =2.0;
+                  case (valWeight >= 50 && valWeight  < 70):
+                      waterVol = 2.0;
+                      break;
                   case (valWeight >= 70):
-                      waterVol =2.5;
-              return waterVol;
+                      waterVol = 2.5;
+                      break;
+                  default:
+                      waterVol = 1.5  
+              console.log(waterVol)
+              
           }
         }
         else{console.log("Error: Weight is Undefined!");}
           
+        return waterVol;
         }
         function setCriteriaSeason(waterVol){
           
@@ -69,13 +74,18 @@
               switch (true) {
                   case (valSeason === "Summer"):
                       waterVol +=1.5;
-                  case (valSeason === "Water"):
+                      break;
+                  case (valSeason === "Winter"):
                       waterVol -=0.5;
-              return waterVol;
+                      break;
+                  default:
+                      waterVol;
           }
+
         }
         else{console.log("Error: Season is Undefined!");}
-        }
+        return waterVol;
+      }
 
 
         function suggestedWaterEst(){
