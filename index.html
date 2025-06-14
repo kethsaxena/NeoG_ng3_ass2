@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>🏋 BMI Buddy</title>
+    <title>SmartMarketeer Tools</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
@@ -12,102 +12,48 @@
   </head>
   <body>
     <header class="container">
-      <nav>
+      <nav id="custom-nav">
         <ul>
-          <li><a href="index.html">BMI Buddy</a></li>
-          <li><a href="CC.html">Calorie Compass</a></li>
-          <li><a href="WW.html">Water Watcher</a></li>
-          <li><a href="SS.html">Steps Sankhya</a></li>
+          <li><a href="index.html">Smart Marketer Tools</a></li>
+          <li><a href="WAMI.html">WAMI Link</a></li>
+          <li><a href="Twitter.html">Twitter Share Generator</a></li>
+          <li><a href="Github.html">Github Link Generator</a></li>
         </ul>
       </nav>
       <hgroup>
-        <h1>BMI Buddy</h1>
-        <p>Calculate Your BMI</p>
+        <h1>SmartMarketer Tools</h1>
+        <p>A collection of practical tools for marketers to generate shareable links, plan campaigns and simplify digital workflows.</p>
       </hgroup>
     </header>
     <main class="container">
-      <div style="display: flex; flex-direction: column; gap: 15px; align-items: flex-start;">
-        <input id="Weight" type="text" placeholder="Enter Weight(Kg)" style="width: 350px;">
-        <input id="Height" type="text" placeholder="Enter Height(cm)" style="width: 350px;">
-      
-        <select id="gender" name="gender" style="width: 350px;">
-          <option value="Female">Female</option>
-          <option value="Male">Male</option>
-        </select>
-        <button id="Btn">Check my BMI</button>
-      </div>
-      <section>
-        <p id="result"></p>
-      </section>
+      <hr />
+      <section class="grid">
+        <article>
+          <hgroup>
+            <h3>WAMI link Generator</h3>
+          </hgroup>
+          <footer>
+            <a href="WAMI.html" class="secondary">Open Tool</a>
+          </footer>
+        </article>
+        <article>
+          <hgroup>
+            <h3>Twitter Share Generator</h3>
+          </hgroup>
+          <footer>
+            <a href="Twitter.html" class="secondary">Open Tool</a>
+          </footer>
+        </article>
+        <article>
+           <hgroup>
+            <h3>Github Link Generator</h3>
+          </hgroup>
+          <footer>
+            <a href="Github.html" class="secondary">Open Tool</a>
+          </footer>
+        </article>
       <script>
-  document.getElementById('Btn').addEventListener('click', () => {
-    const weightInput = document.getElementById('Weight').value.trim();
-    const heightInput = document.getElementById('Height').value.trim();
-    const gender = document.getElementById('gender').value;
-    const resultEl = document.getElementById('result');
-
-    // Parse and validate
-    const weight = parseFloat(weightInput);
-    const heightCm = parseFloat(heightInput);
-
-    if ((isNaN(weight) || weight <= 0) &&(isNaN(heightCm) || heightCm <= 0)) {
-      resultEl.innerText = '⚠️ Please enter valid height (cm) and weight (kg).';
-      return;
-    }
-
-    // catch if just weight is invalid
-    if (isNaN(weight) || weight <= 0) {
-      resultEl.innerText = '⚠️ Please enter a valid weight in kg.';
-      return;
-    }
-
-    // catch if just height is invalid
-    if (isNaN(heightCm) || heightCm <= 0) {
-      resultEl.innerText = '⚠️ Please enter a valid height in cm.';
-      return;
-    }
-
-    // Compute BMI
-    const heightM = heightCm / 100;
-    const bmi = weight / (heightM * heightM);
-    const bmiRounded = bmi.toFixed(2);
-
-    function calcBMIMale(index){
-      if (index < 18.5) {
-      category = 'Underweight';
-    } else if (index < 25) {
-      category = 'Normal weight';
-    } else if (index < 30) {
-      category = 'Overweight';
-    } else {
-      category = 'Obese';
-    }
-    }
-
-    
-    function calcBMIFemale(index){
-    if (index < 18) {category = 'Underweight';
-    } else if (index < 24) {
-      category = 'Normal weight';
-    } else if (index < 29) {
-      category = 'Overweight';
-    } else {
-      category = 'Obese';
-    }
-  }
-    
-    // Classify
-    // MALE
-    let category;
-    if(gender ==="Male"){calcBMIMale(bmi)}
-    // FEMALE
-    else{calcBMIFemale(bmi)}
-
-    
-    // Display
-    resultEl.innerText = `Gender: ${gender} — BMI:${bmiRounded} (${category}).`;
-  });
-</script>
+      </script>
 </main>
   </body>
 </html>

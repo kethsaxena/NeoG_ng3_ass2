@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="Get your Twitter link just from userlink"
+    />
+    <title>Tweet MSG generator</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="container">
+      <nav id="custom-nav">
+        <ul>
+          <li><a href="index.html">Smart Marketer Tools</a></li>
+          <li><a href="WAMI.html">WAMI Link</a></li>
+          <li><a href="Twitter.html">Twitter Share Generator</a></li>
+          <li><a href="Github.html">Github Link Generator</a></li>
+        </ul>
+      </nav>
+
+      <hgroup>
+        <h1>Tweet Link  Generator</h1>
+        <p>GENERATE a custom tweet link</p>
+      </hgroup>
+    </header>
+    <main class="container">
+      <fieldset role="group" >
+        <input type ="text" id="TweetMSG" placeholder="Enter your Custom Twitter / X message"/>
+        <input type="button" id="genTweetLink" value="Generate URL"/>
+      </fieldset>
+      <div id="app"></div>
+    </main>
+    <script id="NeoG_ng1_Ass3">
+      // Select elements
+      const inputMessage = document.getElementById("TweetMSG");
+      const buttonGenerate = document.getElementById("genTweetLink");
+      const appElement = document.getElementById("app");
+
+      // Function to generate WhatsApp link
+      function getTweetMsg(message) {
+        let encodedMsg = encodeURIComponent(message);
+        return  "https://twitter.com/home/intent/tweet" +  '?text=' + encodedMsg;
+      }
+
+      // Handle click
+      function handleGenerateClick() {
+        const message = inputMessage.value;
+        // Generate URL
+        const TwitterURL = getTweetMsg(message);
+        // Show the URL as a clickable link
+        appElement.innerHTML = TwitterURL;
+      }
+      // Event Listener
+      buttonGenerate.addEventListener("click", handleGenerateClick);
+</script>
+  </body>
+</html>
