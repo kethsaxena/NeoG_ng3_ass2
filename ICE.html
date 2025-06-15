@@ -27,8 +27,8 @@
         </ul>
       </nav>
       <hgroup>
-        <h1>Fuel Cost Calculator</h1>
-        <p>Calculate the Total Cost to Travel given the total tcance,mileage and unit cost of gas</p>
+        <h1>Itinerary Calculator</h1>
+        <p>Calculate the Total Cost of Travel given the Transport, hotel, food and activity cost</p>
       </hgroup>
     </header>
     <main class="container">
@@ -37,11 +37,12 @@
         <input id="tc" type ="number" placeholder="Cost in INR(₹)" />
         <label>Hotel Type:</label>
         <select name="htype" id="htype">
-          <option disabled selected>--Please-Select-Hotel-Type---</option>
+          <option value="" disabled selected>--Please-Select-Hotel-Type---</option>
           <option value="1">Budget</option>
           <option value="2">Standard</option>
           <option value="3">Luxury</option>
         </select>
+        <p id="htypeLabel" style="margin-top:10px; color:green;"></p>
         <label>Food Cost:</label>
         <input id="fc" type ="number" placeholder="Cost in INR(₹)" />
         <label>Activities Cost:</label>
@@ -58,7 +59,10 @@
     const inputTcost = document.getElementById("tc");
     const inputFc = document.getElementById("fc");
     const inputAc = document.getElementById("ac");
+
     const buttonGenerate = document.getElementById("calcCost");
+    const selectHtype = document.getElementById("htype");
+   
     const result = document.getElementById("result");
 
 
@@ -70,27 +74,28 @@
     }
 
     function calcgetHotelCost () {
+      const labelHtype= document.getElementById("htypeLabel");
+      const inputHtype = document.getElementById("htype").value;
       const hMap = {
         1:"1000",
         2:"2500",
         3:"3000",
 
       }
-      const inputHtype = document.getElementById("htype").value;
       
-      if(hMap[inputHtype]){
-
+      if(hMap.hasOwnProperty(inputHtype)){
         const HCost = hMap[inputHtype];
+        const HCostFormatted = parseFloat(hMap[inputHtype]).toLocaleString('en-US',{minimumFractionDigits: 2,
+    maximumFractionDigits: 2});
+        labelHtype.innerText  = `Hotel Cost: ₹${HCost}`;
         return HCost;
-
       }
 
       else{
         result.innerText("Hotel Cost Not Found")
       }
     }
-    document.getElementById("htype").addEventListener("change", calcgetHotelCost);
-
+    
     // Handle click
     function calcTotalCostClick () {
       // Generate URL
@@ -109,8 +114,10 @@
       }
       
     }
+    
 
     // Event Listener
+    selectHtype.addEventListener("change", calcgetHotelCost);
     buttonGenerate.addEventListener("click", calcTotalCostClick );
 </script>
 
