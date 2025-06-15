@@ -82,12 +82,20 @@
         3:"3000",
 
       }
+
+      const hMaptype = {
+        1:"Budget",
+        2:"Standard",
+        3:"Luxury",
+
+      }
       
       if(hMap.hasOwnProperty(inputHtype)){
+        const HType = hMaptype[inputHtype];
         const HCost = hMap[inputHtype];
         const HCostFormatted = parseFloat(hMap[inputHtype]).toLocaleString('en-US',{minimumFractionDigits: 2,
     maximumFractionDigits: 2});
-        labelHtype.innerText  = `Hotel Cost: ₹${HCost}`;
+        labelHtype.innerText  = `Cost for ${HType}: ₹${HCost}`;
         return HCost;
       }
 
