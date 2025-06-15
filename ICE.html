@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="Get your github link just from userlink"
+    />
+    <title>Github URL Generator</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="container">
+       <nav id="custom-nav">
+       <ul>
+          <li><a href="index.html">Tripwise Tools</a></li>
+          <li><a href="ASC.html">Average Speed Calculator</a></li>
+          <li><a href="ETA.html">ETA Calculator</a></li>
+          <li><a href="FCC.html">Fuel Cost Calculator</a></li>
+          <li><a href="ICE.html">Itinerary Cost Estimator</a></li>
+        </ul>
+      </nav>
+      <hgroup>
+        <h1>Github URL Generator</h1>
+        <p>Get your github link just from userlink</p>
+      </hgroup>
+    </header>
+    <main class="container">
+      <fieldset role="group" >
+        <input type ="text" id="github" placeholder="Enter your Github username"/>
+        <input type="button" id="generateURL" value="Generate URL"/>
+      </fieldset>
+      <div id="app"></div>
+    </main>
+    <script id="ng1.3"> 
+    // TASK 1
+    const username = "Kethsaxena";
+
+    function getGitHubURL(username) {
+      return "https://github.com/"+username;
+    }
+
+    function handleGenerateClick(){
+      const githubURL = getGitHubURL(inputElement.value);
+      appElement.innerHTML = githubURL
+    }
+
+    //OBJECTS
+    const inputElement = document.getElementById("github")
+    const buttonElement = document.getElementById("generateURL")   
+    const appElement = document.getElementById("app")
+
+    //appElement.innerText = 
+    buttonElement.addEventListener("click",handleGenerateClick)
+
+    </script>
+  </body>
+</html>
