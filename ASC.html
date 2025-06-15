@@ -8,7 +8,7 @@
       name="description"
       content="Get your WA ME link just from a click"
     />
-    <title>WaMe LinkMSG</title>
+    <title>🚗 ASC</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
@@ -18,93 +18,66 @@
   <body>
     <header class="container">
        <nav id="custom-nav">
-       <ul>
+      <ul>
           <li><a href="index.html">Tripwise Tools</a></li>
-          <li><a href="WAMI.html">Average Speed Calculator</a></li>
-          <li><a href="Twitter.html">ETA Calculator</a></li>
+          <li><a href="ASC.html">Average Speed Calculator</a></li>
+          <li><a href="ETA.html">ETA Calculator</a></li>
           <li><a href="FCC.html">Fuel Cost Calculator</a></li>
-          <li><a href="FCC.html">Itinerary Cost Estimator</a></li>
+          <li><a href="ICE.html">Itinerary Cost Estimator</a></li>
         </ul>
       </nav>
       <hgroup>
-        <h1>Whatsapp Link+MSG Generator</h1>
-        <p>Get your Whatsapp Link from just your phone number</p>
+        <h1>Average Speed Calculator</h1>
+        <p>Calculate the average speed given the total distance, and total time take to travel</p>
       </hgroup>
     </header>
     <main class="container">
       <div id="app">
-        <input id="waNum" type ="number" maxlength="13"  placeholder="Enter your Whatsapp number" />
-       <!-- Initially hidden select -->
-        <select id="message" name="message" style="display: none;">
-          <option value="" disabled selected>---Choose a message---</option>
-          <option value="1">Hi I am interested in your product!</option>
-          <option value="2">Hello can we connect regarding a service!</option>
-          <option value="3">Please share more details</option>
-        </select>
+        <input id="dist" type ="number" placeholder="Enter distance(KM)" />
+        <input id="time" type ="number" placeholder="Enter Time(Hours)" />
         <br/>
-        <input type="button" id="generateURL" value="Generate Whatsapp URL & Message" />
+        <input type="button" id="calcSpeed" value="Calculate Speed" />
       </div>
        <section>
         <p id="result"></p>
       </section>
     </main>
 <script id="NeoG_ng1_Ass2">
+    // Select elements
+    const inputDistance = document.getElementById("dist");
+    const inputTime = document.getElementById("time");
+    const buttonGenerate = document.getElementById("calcSpeed");
+    const result = document.getElementById("result");
 
 
-// Select elements
-const inputNumber = document.getElementById("waNum");
-const inputMessageKey = document.getElementById("message");
-const buttonGenerate = document.getElementById("generateURL");
-const result = document.getElementById("result");
-
-inputNumber.addEventListener("input", () => {
-    const phone = inputNumber.value.trim();
-
-    // Show select if phone number is 10+ digits
-    if (phone.length >= 10) {
-      inputMessageKey.style.display = "inline-block";
-    } else {
-      inputMessageKey.style.display = "none";
+    // Function to generate WhatsApp link
+    function getAvgSpeed(dist, time) {
+      let speed  = parseFloat(dist.replace(/[^\d]/g, ''))/parseFloat(time.replace(/[^\d]/g, ''));
+      return  speed;
     }
-  });
 
+    // Handle click
+    function calcAvgSpeedClick () {
+      // Generate URL
+      const TDist = inputDistance.value;
+      const Ttime = inputTime.value
 
-// Function to generate WhatsApp link
-function getWhatsAppURL(number, message) {
-  // Clean up the number: remove any '+' or spaces
-  let cleanedNumber = number.replace(/[^\d]/g, '');
-  let encodedMsg = encodeURIComponent(message);
-  return  "https://wa.me/+1" + cleanedNumber + '?text=' + encodedMsg;
-}
+      const avgSpeed = getAvgSpeed(TDist, Ttime);
+      
+      
+      
 
-// Handle click
-function handleGenerateClick() {
-  const messageMap = {
-  1: "Hi I am interested in your product!",
-  2: "Hello can we connect regarding a service!",
-  3: "Please share more details"
-};
-  const selectedKey = parseInt(inputMessageKey.value, 10);
-  const inputMessage = messageMap[selectedKey];
-  const number = inputNumber.value;
-  const message = inputMessage;
+      if (avgSpeed) {
+        result.innerText = `Your average speed: ${avgSpeed} km/hr`;
+      }
+      else{
+        result.innerText = `Try Again: Soemthing Went Wrong`;
+      }
+      
+    }
 
-  if (!number) {
-    result.innerText = "<b>Please enter your Whatsapp number.</b>";
-    return;
-  }
-  else{
-    
-  }
-  // Generate URL
-  const waURL = getWhatsAppURL(number, message);
-  // Show the URL as a clickable link
-  result.innerText = waURL ;
-
-}
-
-// Event Listener
-buttonGenerate.addEventListener("click", handleGenerateClick);
+    // Event Listener
+    buttonGenerate.addEventListener("click", calcAvgSpeedClick );
 </script>
 
   </body>

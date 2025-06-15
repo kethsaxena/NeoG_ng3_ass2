@@ -6,9 +6,9 @@
     <meta name="color-scheme" content="light dark" />
     <meta
       name="description"
-      content="Get your Twitter link just from userlink"
+      content="Get your WA ME link just from a click"
     />
-    <title>Tweet MSG generator</title>
+    <title>⌚️ ETA</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
@@ -17,50 +17,68 @@
   </head>
   <body>
     <header class="container">
-      <nav id="custom-nav">
-       <ul>
+       <nav id="custom-nav">
+      <ul>
           <li><a href="index.html">Tripwise Tools</a></li>
-          <li><a href="WAMI.html">Average Speed Calculator</a></li>
-          <li><a href="Twitter.html">ETA Calculator</a></li>
+          <li><a href="ASC.html">Average Speed Calculator</a></li>
+          <li><a href="ETA.html">ETA Calculator</a></li>
           <li><a href="FCC.html">Fuel Cost Calculator</a></li>
-          <li><a href="FCC.html">Itinerary Cost Estimator</a></li>
+          <li><a href="ICE.html">Itinerary Cost Estimator</a></li>
         </ul>
       </nav>
-
       <hgroup>
-        <h1>Tweet Link  Generator</h1>
-        <p>GENERATE a custom tweet link</p>
+        <h1>Estimated Time of Arrival</h1>
+        <p>Calculate the time taken for a given distance and average speed taken to travel</p>
       </hgroup>
     </header>
     <main class="container">
-      <fieldset role="group" >
-        <input type ="text" id="TweetMSG" placeholder="Enter your Custom Twitter / X message"/>
-        <input type="button" id="genTweetLink" value="Generate URL"/>
-      </fieldset>
-      <div id="app"></div>
+      <div id="app">
+        <input id="dist" type ="number" placeholder="Enter distance(Km)" />
+        <input id="speed" type ="number" placeholder="Enter Speed(Km/Hours)" />
+        <br/>
+        <input type="button" id="calcETA" value="Calculate ETA / Time taken" />
+      </div>
+       <section>
+        <p id="result"></p>
+      </section>
     </main>
-    <script id="NeoG_ng1_Ass3">
-      // Select elements
-      const inputMessage = document.getElementById("TweetMSG");
-      const buttonGenerate = document.getElementById("genTweetLink");
-      const appElement = document.getElementById("app");
+<script id="NeoG_ng1_Ass2">
+    // Select elements
+    const inputDistance = document.getElementById("dist");
+    const inputSpeed = document.getElementById("speed");
+    const buttonGenerate = document.getElementById("calcETA");
+    const result = document.getElementById("result");
 
-      // Function to generate WhatsApp link
-      function getTweetMsg(message) {
-        let encodedMsg = encodeURIComponent(message);
-        return  "https://twitter.com/home/intent/tweet" +  '?text=' + encodedMsg;
-      }
 
-      // Handle click
-      function handleGenerateClick() {
-        const message = inputMessage.value;
-        // Generate URL
-        const TwitterURL = getTweetMsg(message);
-        // Show the URL as a clickable link
-        appElement.innerHTML = TwitterURL;
+    // Function to generate WhatsApp link
+    function getAvgSpeed(dist, time) {
+      let speed  = parseFloat(dist.replace(/[^\d]/g, ''))/parseFloat(time.replace(/[^\d]/g, ''));
+      return  speed;
+    }
+
+    // Handle click
+    function calcAvgSpeedClick () {
+      // Generate URL
+      const TDist = inputDistance.value;
+      const AvgSpeed = inputSpeed.value
+
+      const Ttime = getAvgSpeed(TDist, AvgSpeed).toFixed(2);
+      
+      
+      
+
+      if (Ttime) {
+        result.innerText = `ETA: ${Ttime} hours`;
       }
-      // Event Listener
-      buttonGenerate.addEventListener("click", handleGenerateClick);
+      else{
+        result.innerText = `Try Again: Soemthing Went Wrong`;
+      }
+      
+    }
+
+    // Event Listener
+    buttonGenerate.addEventListener("click", calcAvgSpeedClick );
 </script>
+
   </body>
 </html>

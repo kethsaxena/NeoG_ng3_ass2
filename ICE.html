@@ -6,9 +6,9 @@
     <meta name="color-scheme" content="light dark" />
     <meta
       name="description"
-      content="Get your github link just from userlink"
+      content="Get your WA ME link just from a click"
     />
-    <title>Github URL Generator</title>
+    <title>💵🫰💵 ICE</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
@@ -18,7 +18,7 @@
   <body>
     <header class="container">
        <nav id="custom-nav">
-       <ul>
+      <ul>
           <li><a href="index.html">Tripwise Tools</a></li>
           <li><a href="ASC.html">Average Speed Calculator</a></li>
           <li><a href="ETA.html">ETA Calculator</a></li>
@@ -27,38 +27,92 @@
         </ul>
       </nav>
       <hgroup>
-        <h1>Github URL Generator</h1>
-        <p>Get your github link just from userlink</p>
+        <h1>Fuel Cost Calculator</h1>
+        <p>Calculate the Total Cost to Travel given the total tcance,mileage and unit cost of gas</p>
       </hgroup>
     </header>
     <main class="container">
-      <fieldset role="group" >
-        <input type ="text" id="github" placeholder="Enter your Github username"/>
-        <input type="button" id="generateURL" value="Generate URL"/>
-      </fieldset>
-      <div id="app"></div>
+      <div id="app">
+        <label>Transport Cost:</label>
+        <input id="tc" type ="number" placeholder="Cost in INR(₹)" />
+        <label>Hotel Type:</label>
+        <select name="htype" id="htype">
+          <option disabled selected>--Please-Select-Hotel-Type---</option>
+          <option value="1">Budget</option>
+          <option value="2">Standard</option>
+          <option value="3">Luxury</option>
+        </select>
+        <label>Food Cost:</label>
+        <input id="fc" type ="number" placeholder="Cost in INR(₹)" />
+        <label>Activities Cost:</label>
+        <input id="ac" type ="number" placeholder="Cost in INR(₹)" />
+        <br/>
+        <input type="button" id="calcCost" value="Calculate Total Cost in INR(₹)" />
+      </div>
+       <section>
+        <p id="result"></p>
+      </section>
     </main>
-    <script id="ng1.3"> 
-    // TASK 1
-    const username = "Kethsaxena";
+<script id="NeoG_ng1_Ass2">
+    // Select elements
+    const inputTcost = document.getElementById("tc");
+    const inputFc = document.getElementById("fc");
+    const inputAc = document.getElementById("ac");
+    const buttonGenerate = document.getElementById("calcCost");
+    const result = document.getElementById("result");
 
-    function getGitHubURL(username) {
-      return "https://github.com/"+username;
+
+    // Function to generate WhatsApp link
+    function getCost(tc, fc,ac,hc) {
+      let cost  = parseFloat(tc.replace(/[^\d]/g, ''))+parseFloat(fc.replace(/[^\d]/g, ''))+parseFloat(ac.replace(/[^\d]/g, ''))+parseFloat(hc.replace(/[^\d]/g, ''));
+      return  cost.toLocaleString('en-US',{minimumFractionDigits: 2,
+    maximumFractionDigits: 2});
     }
 
-    function handleGenerateClick(){
-      const githubURL = getGitHubURL(inputElement.value);
-      appElement.innerHTML = githubURL
+    function calcgetHotelCost () {
+      const hMap = {
+        1:"1000",
+        2:"2500",
+        3:"3000",
+
+      }
+      const inputHtype = document.getElementById("htype").value;
+      
+      if(hMap[inputHtype]){
+
+        const HCost = hMap[inputHtype];
+        return HCost;
+
+      }
+
+      else{
+        result.innerText("Hotel Cost Not Found")
+      }
+    }
+    document.getElementById("htype").addEventListener("change", calcgetHotelCost);
+
+    // Handle click
+    function calcTotalCostClick () {
+      // Generate URL
+      const Tcost = inputTcost.value;
+      const Fcost = inputFc.value;
+      const Acost = inputAc.value;
+      const Hcost = calcgetHotelCost();
+
+      const tCost = getCost(Tcost, Fcost,Acost,Hcost);
+      
+      if (tCost) {
+        result.innerText = `Your Total Cost of Trip :₹${tCost} `;
+      }
+      else{
+        result.innerText = `Try Again: Soemthing Went Wrong`;
+      }
+      
     }
 
-    //OBJECTS
-    const inputElement = document.getElementById("github")
-    const buttonElement = document.getElementById("generateURL")   
-    const appElement = document.getElementById("app")
+    // Event Listener
+    buttonGenerate.addEventListener("click", calcTotalCostClick );
+</script>
 
-    //appElement.innerText = 
-    buttonElement.addEventListener("click",handleGenerateClick)
-
-    </script>
   </body>
 </html>
